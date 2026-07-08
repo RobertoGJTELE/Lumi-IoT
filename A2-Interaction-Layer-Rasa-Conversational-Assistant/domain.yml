@@ -1,0 +1,144 @@
+#Definition of the conversational universe: intents, entities, slots, responses, and custom actions.
+version: "2.0"
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+  - welcome
+  - thanks
+  - goodbye
+  - cancel
+  - confirm
+  - reject
+  - build
+  - build-feedback
+  - ask_robotics_laws
+entities:
+  - entity
+  - value
+  - operation
+  - target
+  - origin
+  - destination
+  - protocol
+  - service
+  - traffic
+  - group
+  - middlebox
+  - start
+  - end
+  - qos_metric
+  - qos_unit
+  - qos_value
+  - qos_constraint
+  - location
+  - hour
+  - device
+  - sensor_type
+  - air_quality_parameter
+  - air_quality_sensor
+  - endpoint
+slots:
+  entity:
+    type: categorical
+    values:
+      - group
+      - location
+      - middlebox
+      - service
+      - traffic
+      - protocol
+      - endpoint
+      - device
+      - sensor_type
+    influence_conversation: true
+    auto_fill: true
+  value:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  location:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+  qos_value:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+  qos_unit:
+    type: text
+    influence_conversation: false
+    auto_fill: true
+  compiled_policy:
+    type: any
+    influence_conversation: false
+  pending_nile_command:
+    type: text
+    influence_conversation: false
+  pending_confirmation:
+    type: bool
+    influence_conversation: false
+  original_entities:
+    type: any
+    influence_conversation: false
+  missing_entity_type:
+    type: text
+    influence_conversation: false
+  missing_entity_value:
+    type: text
+    influence_conversation: false
+  awaiting_feedback:
+    type: bool
+    influence_conversation: false
+  intent_id:
+    type: text
+    influence_conversation: false
+responses:
+  utter_greet:
+    - text: Hey! How are you?
+  utter_thank_you:
+    - text: You're welcome!
+  utter_did_that_help:
+    - text: Did that help you?
+  utter_happy:
+    - text: Great, carry on!
+  utter_goodbye:
+    - text: Bye! Thank you!
+  utter_ask_for_feedback:
+    - text: Hmm, okay. What did I miss?
+  utter_start_over:
+    - text: Okay. Please start over then.
+  utter_ask_entity:
+    - text: What type of entity did I miss?
+      buttons:
+        - title: location
+          payload: location
+        - title: group
+          payload: group
+        - title: middlebox
+          payload: middlebox
+        - title: service
+          payload: service
+        - title: traffic
+          payload: traffic
+        - title: protocol
+          payload: protocol
+        - title: device
+          payload: device
+        - title: sensor_type
+          payload: sensor_type
+        - title: air_quality_parameter
+          payload: air_quality_parameter
+        - title: air_quality_sensor
+          payload: air_quality_sensor
+  utter_ask_value:
+    - text: And what is the value for the {entity}?
+actions:
+  - action_build
+  - action_deploy
+  - action_robotics_laws
+  - action_feedback
+  - action_feedback_confirm
+  - action_cancel
