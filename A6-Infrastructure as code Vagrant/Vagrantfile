@@ -1,0 +1,68 @@
+#Configuration of the lumi-deployer virtual machine (Ubuntu 22.04 LTS, 2 CPU, 4 GB RAM, host-only network 192.168.56.10).
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$init = <<SCRIPT
+  sudo apt-get update
+  sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+  # Herramientas base
+  sudo apt-get install -y \
+    python3 python3-pip python3-venv \
+    git curl build-essential \
+    software-properties-common
+
+  # Crear entorno virtual limpio
+  python3 -m venv /home/vagrant/venv
+
+  # Activar entorno
+  source /home/vagrant/venv/bin/activate
+
+  # Downgrade herramientas (CLAVE para Ryu)
+  pip install "pip<23"
+  pip install "setuptools<58"
+  pip install "wheel<0.38"
+
+  # Actualizar lo demás sin romper compatibilidad
+  pip install --upgrade pipenv
+SCRIPT
+
+$mininet = <<SCRIPT
+  sudo apt-get install -y mininet openvswitch-switch
+SCRIPT
+
+$lumi = <<SCRIPT
+  source /home/vagrant/venv/bin/activate
+  cd /home/vagrant/deployer
+
+  # Instalar dependencias del proyecto
+  pipenv install --python 3.8
+SCRIPT
+
+$cleanup = <<SCRIPT
+  sudo apt-get clean
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  config.vm.define "lumi-deployer"
+
+  config.vm.synced_folder ".", "/home/vagrant/deployer/"
+
+  config.vm.provider "virtualbox" do |v|
+      v.memory = 4096
+      v.cpus = 2
+  end
+
+  config.vm.hostname = "lumi-deployer"
+  config.vm.network :private_network, ip: "192.168.56.10"
+
+  config.vm.provision :shell, privileged: true, inline: $init
+  config.vm.provision :shell, privileged: true, inline: $mininet
+  config.vm.provision :shell, privileged: true, inline: $lumi
+  config.vm.provision :shell, privileged: true, inline: $cleanup
+  config.vm.network "forwarded_port", guest: 8181, host: 8181
+  config.vm.network "forwarded_port", guest: 8101, host: 8101
+end
