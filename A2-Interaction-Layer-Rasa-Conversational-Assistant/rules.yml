@@ -5,14 +5,17 @@ rules:
     steps:
       - intent: build
       - action: action_build
+
   - rule: Start feedback on reject
     steps:
       - intent: reject
       - action: action_feedback
+
   - rule: Always handle feedback input
     steps:
       - intent: build-feedback
       - action: action_feedback
+
   - rule: Confirm and deploy
     condition:
       - slot_was_set:
@@ -20,10 +23,12 @@ rules:
     steps:
       - intent: confirm
       - action: action_feedback_confirm
+
   - rule: Cancel at any time
     steps:
       - intent: cancel
       - action: action_cancel
+
   - rule: Say hello
     condition:
       - slot_was_set:
@@ -31,6 +36,7 @@ rules:
     steps:
       - intent: welcome
       - action: utter_greet
+
   - rule: Robotics laws
     condition:
       - slot_was_set:
