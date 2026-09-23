@@ -5,6 +5,10 @@ pipeline:
   - name: RegexFeaturizer
     case_sensitive: false
   - name: LexicalSyntacticFeaturizer
+  - name: RegexEntityExtractor
+    case_sensitive: false
+    use_lookup_tables: true
+    use_regexes: true
   - name: CountVectorsFeaturizer
   - name: CountVectorsFeaturizer
     analyzer: char_wb
@@ -14,11 +18,9 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
+    entity_recognition: true
+    intent_classification: true
   - name: EntitySynonymMapper
-  - name: rasa_composite_entities.CompositeEntityExtractor
-    composite_patterns_path: ./data/composite.json
-  - name: ResponseSelector
-    epochs: 100
 policies:
   - name: MemoizationPolicy
   - name: TEDPolicy
@@ -26,7 +28,3 @@ policies:
     epochs: 100
   - name: MappingPolicy
   - name: RulePolicy
-data:
-  nlu: "data/intents.yml"
-  stories: "data/stories.yml"
-  rules: "data/rules.yml"
