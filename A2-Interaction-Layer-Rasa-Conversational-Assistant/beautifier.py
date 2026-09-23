@@ -78,4 +78,5 @@ def beautify_intent_colored(nile: str) -> str:
                         mod_text
                     )
             result += mod_text
+
     return result
