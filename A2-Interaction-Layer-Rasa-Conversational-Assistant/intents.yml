@@ -1,4 +1,4 @@
-#Training corpus for the NLU model with annotated examples referencing entities of the IoT topology.
+#Training corpus for the NLU model with annotated examples referencing entities of the IoT.
 version: "2.0"
 nlu:
 - intent: welcome
@@ -7,6 +7,7 @@ nlu:
     - What's up?
     - Hi
     - Hello
+
 - intent: thanks
   examples: |
     - I'm so happy
@@ -16,12 +17,14 @@ nlu:
     - great
     - Thanks a lot!
     - thank you!
+
 - intent: goodbye
   examples: |
     - Great! Bye!
     - Bye bye!
     - See you later then!
     - Ok, see you!
+
 - intent: cancel
   examples: |
     - cancel
@@ -41,6 +44,7 @@ nlu:
     - cancel this
     - stop process
     - abort mission
+
 - intent: confirm
   examples: |
     - sure
@@ -85,6 +89,7 @@ nlu:
     - right
     - alright why not
     - yep
+
 - intent: reject
   examples: |
     - No
@@ -101,6 +106,7 @@ nlu:
     - no way
     - never
     - nothing
+
 - intent: ask_robotics_laws
   examples: |
     - Tell me the three laws of robotics
@@ -110,8 +116,100 @@ nlu:
     - Explain the three laws
     - What are Asimov's three laws?
     - three laws of robotics
+
 - intent: build
   examples: |
+    - [block](operation) [temp1](origin) to [temp2](destination)
+    - [block](operation) [temp1](origin) to [hum2](destination)
+    - [block](operation) [temp1](origin) to [air2](destination)
+    - [block](operation) [hum1](origin) to [temp2](destination)
+    - [block](operation) [hum1](origin) to [hum2](destination)
+    - [block](operation) [hum1](origin) to [air2](destination)
+    - [block](operation) [air1](origin) to [temp2](destination)
+    - [block](operation) [air1](origin) to [hum2](destination)
+    - [block](operation) [air1](origin) to [air2](destination)
+    - [block](operation) [temp2](origin) to [temp1](destination)
+    - [block](operation) [hum2](origin) to [hum1](destination)
+    - [block](operation) [air2](origin) to [air1](destination)
+    - [block](operation) [temp1](origin) to [hum1](destination)
+    - [block](operation) [temp1](origin) to [air1](destination)
+    - [block](operation) [hum1](origin) to [air1](destination)
+    - [block](operation) [temp2](origin) to [hum2](destination)
+    - [block](operation) [temp2](origin) to [air2](destination)
+    - [block](operation) [hum2](origin) to [air2](destination)
+    - [block](operation) [10.0.0.1](origin) to [10.0.0.4](destination)
+    - [block](operation) [10.0.0.2](origin) to [10.0.0.5](destination)
+    - [block](operation) [10.0.0.3](origin) to [10.0.0.6](destination)
+    - [deny](operation) [temp1](origin) to [air2](destination)
+    - [deny](operation) [hum1](origin) to [hum2](destination)
+    - [deny](operation) [10.0.0.3](origin) to [10.0.0.6](destination)
+    - [block](operation) all traffic between [temp1](origin) and [temp2](destination)
+    - [block](operation) all traffic between [hum1](origin) and [air2](destination)
+    - [block](operation) all traffic between [10.0.0.1](origin) and [10.0.0.4](destination)
+    - [deny](operation) all traffic between [temp2](origin) and [hum1](destination)
+    - [block](operation) all traffic between [air1](origin) and [hum2](destination)
+    - [block](operation) all traffic between [10.0.0.2](origin) and [10.0.0.5](destination)
+    - [allow](operation) [temp1](origin) to [temp2](destination)
+    - [allow](operation) [hum1](origin) to [air2](destination)
+    - [allow](operation) [air1](origin) to [hum2](destination)
+    - [allow](operation) [temp2](origin) to [temp1](destination)
+    - [allow](operation) [hum2](origin) to [air1](destination)
+    - [allow](operation) [air2](origin) to [hum1](destination)
+    - [allow](operation) [temp1](origin) to [hum1](destination)
+    - [allow](operation) [hum1](origin) to [air1](destination)
+    - [allow](operation) [temp2](origin) to [hum2](destination)
+    - [allow](operation) [10.0.0.1](origin) to [10.0.0.5](destination)
+    - [allow](operation) [10.0.0.4](origin) to [10.0.0.2](destination)
+    - [permit](operation) [temp2](origin) to [temp1](destination)
+    - [permit](operation) [air2](origin) to [hum1](destination)
+    - [permit](operation) [10.0.0.2](origin) to [10.0.0.5](destination)
+    - [allow](operation) all traffic between [temp1](origin) and [temp2](destination)
+    - [allow](operation) all traffic between [hum1](origin) and [air2](destination)
+    - [allow](operation) all traffic between [10.0.0.1](origin) and [10.0.0.5](destination)
+    - [permit](operation) all traffic between [temp2](origin) and [hum1](destination)
+    - [allow](operation) all traffic between [air1](origin) and [hum2](destination)
+    - [allow](operation) all traffic between [10.0.0.4](origin) and [10.0.0.2](destination)
+    - from endpoint [10.0.0.1](origin) to endpoint [10.0.0.4](destination) set bandwidth [10M](qos_value) [tcp](protocol)
+    - from endpoint [10.0.0.2](origin) to endpoint [10.0.0.5](destination) set bandwidth [8M](qos_value) [tcp](protocol)
+    - from endpoint [10.0.0.3](origin) to endpoint [10.0.0.6](destination) set bandwidth [5M](qos_value) [tcp](protocol)
+    - from endpoint [10.0.0.1](origin) to endpoint [10.0.0.4](destination) set bandwidth [10M](qos_value) [udp](protocol)
+    - from endpoint [10.0.0.2](origin) to endpoint [10.0.0.5](destination) set bandwidth [8M](qos_value) [udp](protocol)
+    - from endpoint [10.0.0.3](origin) to endpoint [10.0.0.6](destination) set bandwidth [5M](qos_value) [udp](protocol)
+    - from endpoint [temp1](origin) to endpoint [temp2](destination) set bandwidth [5M](qos_value) [udp](protocol)
+    - from endpoint [temp1](origin) to endpoint [air2](destination) set bandwidth [2M](qos_value) [tcp](protocol)
+    - from endpoint [hum1](origin) to endpoint [temp2](destination) set bandwidth [3M](qos_value) [udp](protocol)
+    - from endpoint [air1](origin) to endpoint [hum2](destination) set bandwidth [8M](qos_value) [tcp](protocol)
+    - from endpoint [temp2](origin) to endpoint [hum1](destination) set bandwidth [4M](qos_value) [udp](protocol)
+    - from endpoint [hum2](origin) to endpoint [air1](destination) set bandwidth [6M](qos_value) [tcp](protocol)
+    - limit bandwidth from [temp1](origin) to [temp2](destination) to [2M](qos_value) [tcp](protocol)
+    - limit bandwidth from [hum1](origin) to [air2](destination) to [1M](qos_value) [udp](protocol)
+    - limit bandwidth from [cam](origin) to [air2](destination) to [1M](qos_value)
+    - limit bandwidth from [10.0.0.4](origin) to [10.0.0.5](destination) to [1M](qos_value) [tcp](protocol)
+    - limit bandwidth to [2 Mbps](qos_value) from [temp1](origin) to [temp2](destination)
+    - limit bandwidth to [5 Mbps](qos_value) from [hum1](origin) to [air2](destination)
+    - limit bandwidth to [10 Mbps](qos_value) from [air1](origin) to [hum2](destination)
+    - limit bandwidth to [2 Mbps](qos_value) from [10.0.0.1](origin) to [10.0.0.4](destination)
+    - limit bandwidth to [5 Mbps](qos_value) from [10.0.0.2](origin) to [10.0.0.6](destination)
+    - limit bandwidth to [8 Mbps](qos_value) from [10.0.0.3](origin) to [10.0.0.5](destination)
+    - set bandwidth to [2 Mbps](qos_value) from [temp1](origin) to [temp2](destination)
+    - set bandwidth to [2 Mbps](qos_value) from [10.0.0.1](origin) to [10.0.0.4](destination)
+    - configure bandwidth to [2 Mbps](qos_value) from [temp1](origin) to [temp2](destination)
+    - apply bandwidth of [2 Mbps](qos_value) from [temp1](origin) to [temp2](destination)
+    - limit bandwidth to [2 Mbps](qos_value) between [temp1](origin) and [temp2](destination)
+    - limit bandwidth to [5 Mbps](qos_value) between [hum1](origin) and [air2](destination)
+    - limit bandwidth to [10 Mbps](qos_value) between [air1](origin) and [hum2](destination)
+    - limit bandwidth to [2 Mbps](qos_value) between [10.0.0.1](origin) and [10.0.0.4](destination)
+    - set bandwidth to [3 Mbps](qos_value) between [temp2](origin) and [hum1](destination)
+    - set bandwidth to [4 Mbps](qos_value) between [10.0.0.2](origin) and [10.0.0.5](destination)
+    - configure bandwidth to [6 Mbps](qos_value) between [air2](origin) and [temp1](destination)
+    - apply bandwidth of [7 Mbps](qos_value) between [10.0.0.3](origin) and [10.0.0.6](destination)
+    - rate limit to [8 Mbps](qos_value) between [air1](origin) and [hum2](destination) [tcp](protocol)
+    - throttle bandwidth to [4 Mbps](qos_value) between [10.0.0.2](origin) and [10.0.0.5](destination) [udp](protocol)
+    - limit bandwidth to [100 Kbps](qos_value) from [temp1](origin) to [hum2](destination) [tcp](protocol)
+    - limit bandwidth to [1 Gbps](qos_value) between [air1](origin) and [temp2](destination) [udp](protocol)
+    - set bandwidth to [50 Mbps](qos_value) from [10.0.0.1](origin) to [10.0.0.6](destination) [tcp](protocol)
+    - configure bandwidth to [200 Kbps](qos_value) between [air2](origin) and [hum2](destination) [tcp](protocol)
+    - apply bandwidth of [30 Mbps](qos_value) from [temp2](origin) to [air1](destination) [tcp](protocol)
     - Lumi, for the [guest network](location), [limit](qos_constraint) the traffic of [torrent](traffic) protocol to [100](qos_value) [mbps](qos_unit)
     - [unblock](operation) [facebook](service)
     - [unblock](operation) [traffic](traffic)
@@ -304,18 +402,251 @@ nlu:
     - [Get](operation) [sound](sensor_type) level in [studio](location)
     - [Read](operation) [gas](sensor_type) in [lab 3](location)
     - [Check](operation) [flood](sensor_type) sensor in [basement 2](location)
-    - [block](operation) traffic from [cam](origin) to [air](destination)
-    - [block](operation) traffic from [cam](origin) to [air2](destination)
-    - [allow](operation) traffic from [cam](origin) to [air2](destination)
-    - [limit](qos_constraint) bandwidth from [cam2](origin) to [air2](destination) to [1M](qos_value)
-    - [block](operation) [cam](origin) to [air](destination)
-    - [allow](operation) [cam](origin) to [air2](destination)
-    - [limit](qos_constraint) bandwidth [cam2](origin) to [air2](destination) to [1M](qos_value)
-    - [block](operation) from [cam](origin) to [air](destination)
-    - [deny](operation) from [cam](origin) to [air](destination)
-    - [block](operation) traffic from [10.0.0.1](origin) to [10.0.0.2](destination)
-    - [allow](operation) traffic from [10.0.0.1](origin) to [10.0.0.5](destination)
-    - [limit](qos_constraint) bandwidth from [10.0.0.4](origin) to [10.0.0.5](destination) to [1M](qos_value)
+    - [block](operation) [temp1](origin)
+    - [block](operation) [10.0.0.1](origin)
+    - [deny](operation) [hum1](origin)
+    - [allow](operation) [air1](origin)
+    - [permit](operation) [temp2](origin)
+    - [block](operation) [cam](origin)
+    - [allow](operation) [10.0.0.4](origin)
+    - [block](operation) to [temp2](destination)
+    - [allow](operation) to [10.0.0.4](destination)
+    - [deny](operation) to [air2](destination)
+    - [permit](operation) to [hum2](destination)
+    - [block](operation) to [cam2](destination)
+    - [allow](operation) to [10.0.0.5](destination)
+    - [10M](qos_value)
+    - [5Mbps](qos_value)
+    - [1Gbps](qos_value)
+    - [temperature](sensor_type)
+    - [humidity](sensor_type)
+    - [motion](sensor_type)
+    - [co2](air_quality_parameter)
+    - [temp1](origin)
+    - [10.0.0.1](origin)
+    - [enable](operation) power saving
+    - [disable](operation) power saving
+    - [enable](operation) power saving for [node](node) [temp1](node)
+    - [enable](operation) power saving for [node](node) [10.0.0.1](node)
+    - [disable](operation) power saving for [node](node) [hum2](node)
+    - [enable](operation) power saving for [all](node_group) [sensors](node_group)
+    - [disable](operation) power saving for [gateways](node_group)
+    - [set](operation) objective function [OF0](objective_function)
+    - [set](operation) objective function [MRHOF](objective_function)
+    - [set](operation) objective function [COM-OF](objective_function) for [node](node) [temp2](node)
+    - [set](operation) objective function [ADAPTIVE-OF](objective_function) for [all](node_group)
+    - [configure](operation) RPL with [MRHOF](objective_function) for [gateways](node_group)
+    - [use](operation) [OF0](objective_function) for [node](node) [10.0.0.4](node)
+    - [set](operation) duty cycle to [10%](duty_cycle)
+    - [set](operation) duty cycle [20%](duty_cycle) for [node](node) [cam](node)
+    - [set](operation) duty cycle [15%](duty_cycle) for [all](node_group) [sensors](node_group)
+    - [set](operation) trickle algorithm [D-Trickle](trickle_algorithm)
+    - [set](operation) trickle algorithm [FL-Trickle](trickle_algorithm) for [node](node) [10.0.0.2](node)
+    - [enable](operation) [Elastic Trickle](trickle_algorithm) for [gateways](node_group)
+    - [use](operation) [EE-Trickle](trickle_algorithm) for [all](node_group)
+    - [set](operation) [ETX](energy_metric) as metric
+    - [set](operation) [residual_energy](energy_metric) as metric for [node](node) [hum1](node)
+    - [set](operation) [RSSI](energy_metric) as metric for [all](node_group) [routers](node_group)
+    - [use](operation) [hop_count](energy_metric) metric
+    - [set](operation) routing protocol [RPL](routing_protocol)
+    - [set](operation) routing protocol [6TiSCH](routing_protocol) for [node](node) [10.0.0.5](node)
+    - [enable](operation) [Thread](routing_protocol) for [gateways](node_group)
+    - [configure](operation) [DYMO-LOW](routing_protocol) for [all](node_group)
+    - [shutdown](operation) [node](node) [temp1](node)
+    - [power off](operation) [node](node) [10.0.0.1](node)
+    - [reboot](operation) [node](node) [cam](node)
+    - [reset](operation) [node](node) [hum2](node)
+    - [shutdown](operation) [all](node_group) [sensors](node_group)
+    - [power off](operation) [gateways](node_group)
+    - [reboot](operation) [node](node) [10.0.0.6](node)
+    - [set](operation) routing protocol [RPL](routing_protocol) from [08:00](hour) to [12:00](hour)
+    - [enable](operation) power saving from [22:00](hour) to [06:00](hour) for [node](node) [temp1](node)
+    - [set](operation) objective function [MRHOF](objective_function) between [09:00](hour) and [17:00](hour) for [sensors](node_group)
+    - [schedule](operation) sleep from [23:00](hour) to [07:00](hour) for [all](node_group) [sensors](node_group)
+    - [configure](operation) duty cycle [10%](duty_cycle) from [20:00](hour) to [08:00](hour) for [node](node) [10.0.0.2](node)
+    - [show](operation) [energy](query_type) consumption of [node](node) [temp1](node)
+    - [get](operation) [routing table](query_type) of [node](node) [hum2](node)
+    - [monitor](operation) [link quality](query_type) to [10.0.0.4](node)
+    - [show](operation) [battery level](metric_to_show) of [all](node_group) [sensors](node_group)
+    - [get](operation) [network topology](query_type)
+    - [show](operation) [DODAG information](query_type)
+    - [list](operation) neighbors of [node](node) [cam](node)
+    - [check](operation) [ETX](energy_metric) of [node](node) [10.0.0.2](node)
+    - [set](operation) sleep schedule from [22:00](hour) to [06:00](hour) for [node](node) [temp1](node)
+    - [set](operation) wake interval to [5 minutes](wake_interval) for [all](node_group) [sensors](node_group)
+    - [enable](operation) deep sleep mode for [gateways](node_group)
+    - [schedule](operation) maintenance wake at [03:00](hour) for [node](node) [10.0.0.1](node)
+    - [set](operation) sleep time to [10 minutes](wake_interval) after inactivity
+    - [add](operation) [node](node) [10.0.0.5](node) to network
+    - [remove](operation) [node](node) [hum2](node) from network
+    - [set](operation) encryption key for [all](node_group)
+    - [authenticate](operation) [node](node) [cam](node)
+    - [enable](operation) secure join for [sensors](node_group)
+    - [set](operation) pre-shared key for [gateways](node_group)
+    - [balance](operation) load among [routers](node_group)
+    - [prefer](operation) routes with lowest energy consumption
+    - [avoid](operation) nodes with battery below [20%](threshold_value)
+    - [prioritize](operation) critical traffic (alarms)
+    - [set](operation) load balancing weight to [0.8](threshold_value) for [node](node) [10.0.0.3](node)
+    - [set](operation) trickle Imin to [100ms](trickle_imin)
+    - [set](operation) trickle Imax to [10s](trickle_imax)
+    - [set](operation) trickle redundancy to [3](trickle_redundancy)
+    - [reduce](operation) DIO frequency for energy saving
+    - [disable](operation) DAO messages for leaf nodes
+    - [set](operation) DIS interval to [30 seconds](wake_interval)
+    - [set](operation) channel to [25](radio_channel)
+    - [set](operation) transmission power to [10 dBm](tx_power)
+    - [set](operation) data rate to [250 kbps](data_rate)
+    - [enable](operation) frequency hopping
+    - [set](operation) IEEE 802.15.4 channel page to [2](radio_channel)
+    - [simulate](operation) energy saving for [24 hours](simulation_duration)
+    - [what if](operation) I change OF to [MRHOF](objective_function)
+    - [predict](operation) battery life of [temp1](node)
+    - [compare](operation) [OF0](objective_function) vs [MRHOF](objective_function) for [gateways](node_group)
+    - [alert](operation) when node battery below [10%](threshold_value)
+    - [notify](operation) if link quality drops below [50%](threshold_value)
+    - [send](operation) report every [6 hours](report_interval)
+    - [alert](operation) if node goes offline
+    - [update](operation) firmware on [all](node_group) [sensors](node_group)
+    - [check](operation) firmware version of [node](node) [10.0.0.1](node)
+    - [schedule](operation) OTA update for [gateways](node_group) at [02:00](hour)
+    - [rollback](operation) firmware on [node](node) [hum2](node)
+    - block traffic
+    - block
+    - deny
+    - simulate
+    - predict
+    - enable power saving
+    - disable power saving
+    - shutdown
+    - reboot
+    - reset
+    - power off
+    - monitor
+    - get
+    - show
+    - set objective function
+    - set duty cycle
+    - set routing protocol
+    - add node
+    - remove node
+    - authenticate
+    - secure join
+    - update firmware
+    - rollback firmware
+    - I want to block traffic
+    - block all traffic
+    - block the traffic
+    - please block traffic
+    - can you block traffic?
+    - block traffic now
+    - block traffic between nodes
+    - deny traffic
+    - simulate this
+    - simulate the scenario
+    - simulate now
+    - let's simulate
+    - simulate energy saving
+    - simulate for me
+    - predict something
+    - predict now
+    - predict outcome
+    - enable power saving mode
+    - turn on power saving
+    - activate power saving
+    - disable power saving mode
+    - turn off power saving
+    - deactivate power saving
+    - shutdown the node
+    - shutdown now
+    - reboot system
+    - reset everything
+    - power off device
+    - monitor the network
+    - get data
+    - show me
+    - set objective function to OF0
+    - set duty cycle to 10%
+    - set routing protocol to RPL
+    - add a node
+    - remove a node
+    - authenticate node
+    - secure join network
+    - update firmware now
+    - rollback firmware
+    - just block
+    - only block
+    - just simulate
+    - only simulate
+    - simulate please
+    - block please
+    - block traffic from temp1 to temp2
+    - block between nodes
+    - simulate for 24 hours
+    - predict battery life
+    - set power saving on
+    - shutdown temp1
+    - reboot all sensors
+    - monitor temperature
+    - get energy consumption
+    - show routing table
+    - set OF0
+    - set duty cycle 20%
+    - add node 10.0.0.5
+    - remove node hum2
+    - authenticate cam
+    - enable secure join
+    - update firmware on sensors
+    - rollback firmware on temp1
+    - I need to block traffic
+    - I would like to simulate
+    - Can you block traffic?
+    - Please simulate this scenario
+    - Let's block traffic
+    - Let's simulate
+    - Block traffic from A to B
+    - Simulate energy consumption
+    - Predict battery life of node
+    - Enable power saving for node
+    - Disable power saving for all sensors
+    - Shutdown node temp1
+    - Reboot all sensors
+    - Reset gateways
+    - Power off 10.0.0.1
+    - Monitor link quality
+    - Get routing table
+    - Show battery level
+    - Set objective function MRHOF
+    - Set duty cycle to 15%
+    - Set routing protocol 6TiSCH
+    - Add node 10.0.0.6
+    - Remove node hum3
+    - Authenticate node cam2
+    - Enable secure join for sensors
+    - Update firmware on gateways
+    - Rollback firmware on hum2
+    - block traffic now please
+    - simulate this scenario now
+    - predict the outcome
+    - enable power saving on all sensors
+    - disable power saving for gateways
+    - shutdown node 10.0.0.1
+    - reboot all gateways
+    - reset all nodes
+    - power off all sensors
+    - monitor all nodes
+    - get energy consumption of temp1
+    - show battery level of all sensors
+    - set objective function OF0 for all nodes
+    - set duty cycle 10% for sensors
+    - set routing protocol RPL for gateways
+    - add node 10.0.0.7 to network
+    - remove node cam from network
+    - authenticate node 10.0.0.1
+    - secure join for all sensors
+    - update firmware on all gateways
+    - rollback firmware on node hum2
+
 - intent: build-feedback
   examples: |
     - /build_feedback{"entity":"location"}
@@ -356,3 +687,27 @@ nlu:
     - [sensor_type](entity)
     - [air_quality_parameter](entity)
     - [air_quality_sensor](entity)
+    - I meant an [operation](entity)
+    - the [location](entity) I meant is [ResNet](value)
+    - the [entity](value) I said
+    - you've missed the [location](entity)
+    - the [location](entity) should be
+    - I meant [firewall](value) as [middlebox](entity)
+    - the [middlebox](entity) I want is a [shaper](value)
+    - the [location](entity) is '[backend](value)'
+    - [housing](value) is the [location](entity)
+    - [Dorms](value) is the [location](entity)
+    - [University](value) is the [location](entity)
+    - [copyright](value) is the [middlebox](entity)
+    - [firewall](value) is the [middlebox](entity)
+    - [nat](value) is the [middlebox](entity)
+    - I said [group](entity)
+    - the [location](entity) is
+    - the [middlebox](entity) should be
+    - the [service](entity) I meant
+    - the [traffic](entity) I meant
+    - the [protocol](entity) I need
+    - the [device](entity) is
+    - the [sensor_type](entity) I want
+    - the [air_quality_parameter](entity) is
+    - I meant [air_quality_sensor](entity)
