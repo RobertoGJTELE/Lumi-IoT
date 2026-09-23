@@ -1,12 +1,19 @@
 #Declaration of the MongoDB database connection and CRUD operations for managing expected rules, audit logging, and telemetry history.
 # db.py -Connecting to MongoDB and performing CRUD operations for expected rules, auditing, and telemetry.
-import pymongo, os, time
+import pymongo
+import os
+import time
 
 class AssuranceDB:
     def __init__(self, uri=None):
         self.uri = uri or os.getenv("MONGODB_URI", "mongodb://172.29.36.54:27017/lumi")
-        self.client = pymongo.MongoClient(self.uri)
+        self.client = pymongo.MongoClient(self.uri, serverSelectionTimeoutMS=5000)
         self.db = self.client.get_database()
+        # Crear índices para consultas rápidas
+        self.db.ping_metrics.create_index("timestamp")
+        self.db.iperf_tcp.create_index("timestamp")
+        self.db.iperf_udp.create_index("timestamp")
+        self.db.telemetry_history.create_index("timestamp")
 
     @property
     def expected_rules(self):
@@ -20,6 +27,10 @@ class AssuranceDB:
     def telemetry_history(self):
         return self.db.telemetry_history
 
+    @property
+    def delay_jitter_history(self):
+        return self.db.telemetry_delay_jitter
+
     def save_expected_rule(self, rule):
         existing = self.expected_rules.find_one({
             "src_ip": rule["src_ip"],
@@ -28,7 +39,7 @@ class AssuranceDB:
             "queue_id": rule.get("queue_id")
         })
         if existing:
-            print(f"[DB] Rule already exists for {rule['src_ip']}->{rule['dst_ip']} ({rule['action']}). Not duplicated.")
+            print(f"[DB] Rule already exists for {rule['src_ip']}->{rule['dst_ip']} ({rule['action']})")
             return existing["_id"]
         rule["created_at"] = time.time()
         return self.expected_rules.insert_one(rule).inserted_id
@@ -66,3 +77,5 @@ class AssuranceDB:
             "packets_tx_dropped": stats.get("packetsTxDropped", 0),
             "timestamp": time.time()
         })
+
+db = AssuranceDB()
