@@ -120,6 +120,210 @@
         "@air_quality_sensor",
         "the @air_quality_sensor"
       ]
+    },
+    {
+      "name": "energy_command",
+      "patterns": [
+        "enable power saving",
+        "disable power saving",
+        "enable power saving for @node",
+        "disable power saving for @node",
+        "enable power saving for @node_group",
+        "disable power saving for @node_group",
+        "set power saving @power_saving_mode",
+        "set power saving @power_saving_mode for @node",
+        "set power saving @power_saving_mode for @node_group"
+      ]
+    },
+    {
+      "name": "objective_function_command",
+      "patterns": [
+        "set objective function @objective_function",
+        "set objective function @objective_function for @node",
+        "set objective function @objective_function for @node_group",
+        "configure RPL with @objective_function",
+        "configure RPL with @objective_function for @node",
+        "configure RPL with @objective_function for @node_group",
+        "use @objective_function objective function",
+        "use @objective_function objective function for @node",
+        "use @objective_function objective function for @node_group"
+      ]
+    },
+    {
+      "name": "duty_cycle_command",
+      "patterns": [
+        "set duty cycle to @duty_cycle",
+        "set duty cycle @duty_cycle",
+        "set duty cycle to @duty_cycle for @node",
+        "set duty cycle @duty_cycle for @node",
+        "set duty cycle to @duty_cycle for @node_group",
+        "set duty cycle @duty_cycle for @node_group"
+      ]
+    },
+    {
+      "name": "trickle_command",
+      "patterns": [
+        "set trickle algorithm @trickle_algorithm",
+        "set trickle algorithm @trickle_algorithm for @node",
+        "set trickle algorithm @trickle_algorithm for @node_group",
+        "enable @trickle_algorithm",
+        "enable @trickle_algorithm for @node",
+        "enable @trickle_algorithm for @node_group",
+        "use @trickle_algorithm"
+      ]
+    },
+    {
+      "name": "energy_metric_command",
+      "patterns": [
+        "set @energy_metric as metric",
+        "set @energy_metric as metric for @node",
+        "set @energy_metric as metric for @node_group",
+        "use @energy_metric metric",
+        "use @energy_metric metric for @node",
+        "use @energy_metric metric for @node_group"
+      ]
+    },
+    {
+      "name": "routing_protocol_command",
+      "patterns": [
+        "set routing protocol @routing_protocol",
+        "set routing protocol @routing_protocol for @node",
+        "set routing protocol @routing_protocol for @node_group",
+        "enable @routing_protocol",
+        "enable @routing_protocol for @node",
+        "enable @routing_protocol for @node_group",
+        "configure @routing_protocol",
+        "configure @routing_protocol for @node",
+        "configure @routing_protocol for @node_group"
+      ]
+    },
+    {
+      "name": "power_action_command",
+      "patterns": [
+        "@power_action @node",
+        "@power_action @node_group",
+        "@power_action node @node",
+        "@power_action node @node_group",
+        "shutdown @node",
+        "reboot @node",
+        "reset @node",
+        "power off @node"
+      ]
+    },
+    {
+      "name": "scheduled_command",
+      "patterns": [
+        "@operation @entity from @hour to @hour",
+        "@operation @entity between @hour and @hour",
+        "@operation @entity from @hour to @hour for @node",
+        "@operation @entity from @hour to @hour for @node_group",
+        "schedule @operation from @hour to @hour",
+        "schedule @operation from @hour to @hour for @node",
+        "schedule @operation from @hour to @hour for @node_group"
+      ]
+    },
+    {
+      "name": "monitor_command",
+      "patterns": [
+        "show @query_type of @node",
+        "show @query_type of @node_group",
+        "get @query_type of @node",
+        "get @query_type of @node_group",
+        "monitor @query_type for @node",
+        "monitor @query_type for @node_group",
+        "display @metric_to_show of @node",
+        "display @metric_to_show of @node_group",
+        "check @metric_to_show of @node",
+        "check @metric_to_show of @node_group"
+      ]
+    },
+    {
+      "name": "sleep_command",
+      "patterns": [
+        "set sleep schedule from @hour to @hour for @node",
+        "set sleep schedule from @hour to @hour for @node_group",
+        "set sleep schedule @hour to @hour",
+        "set wake interval to @wake_interval",
+        "set wake interval to @wake_interval for @node",
+        "set wake interval to @wake_interval for @node_group",
+        "enable @sleep_mode for @node",
+        "enable @sleep_mode for @node_group"
+      ]
+    },
+    {
+      "name": "security_command",
+      "patterns": [
+        "@security_action node @node",
+        "@security_action node @node_group",
+        "set encryption key for @node",
+        "set encryption key for @node_group",
+        "authenticate @node",
+        "authenticate @node_group",
+        "enable secure join for @node",
+        "enable secure join for @node_group"
+      ]
+    },
+    {
+      "name": "trickle_advanced_command",
+      "patterns": [
+        "set trickle Imin to @trickle_imin",
+        "set trickle Imax to @trickle_imax",
+        "set trickle redundancy to @trickle_redundancy",
+        "set @trickle_imin Imin",
+        "set @trickle_imax Imax",
+        "set @trickle_redundancy redundancy",
+        "reduce @message_type frequency",
+        "disable @message_type messages"
+      ]
+    },
+    {
+      "name": "radio_command",
+      "patterns": [
+        "set channel to @radio_channel",
+        "set transmission power to @tx_power",
+        "set data rate to @data_rate",
+        "enable frequency hopping",
+        "disable frequency hopping",
+        "set frequency hopping @frequency_hopping",
+        "set IEEE 802.15.4 channel page to @radio_channel"
+      ]
+    },
+    {
+      "name": "simulation_command",
+      "patterns": [
+        "simulate @simulation_duration",
+        "simulate @simulation_duration for @node",
+        "simulate @simulation_duration for @node_group",
+        "what if I change OF to @objective_function",
+        "what if I change OF to @objective_function for @node",
+        "predict battery life of @node",
+        "compare @comparison for @node_group"
+      ]
+    },
+    {
+      "name": "alert_command",
+      "patterns": [
+        "alert when @alert_condition",
+        "alert when @alert_condition for @node",
+        "alert when @alert_condition for @node_group",
+        "notify if @alert_condition",
+        "notify if @alert_condition for @node",
+        "send report every @report_interval",
+        "send report every @report_interval for @node"
+      ]
+    },
+    {
+      "name": "firmware_command",
+      "patterns": [
+        "update firmware on @node",
+        "update firmware on @node_group",
+        "check firmware version of @node",
+        "schedule OTA update at @hour",
+        "schedule OTA update at @hour for @node",
+        "rollback firmware on @node",
+        "rollback firmware on @node_group",
+        "set firmware version to @firmware_version"
+      ]
     }
   ]
 }
