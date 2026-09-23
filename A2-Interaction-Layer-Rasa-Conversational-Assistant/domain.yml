@@ -5,6 +5,7 @@ config:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
   - welcome
   - thanks
@@ -15,32 +16,86 @@ intents:
   - build
   - build-feedback
   - ask_robotics_laws
+
 entities:
-  - entity
-  - value
-  - operation
-  - target
   - origin
   - destination
+  - qos_value
   - protocol
-  - service
-  - traffic
+  - operation
+  - entity
+  - value
+  - location
   - group
   - middlebox
-  - start
-  - end
-  - qos_metric
+  - service
+  - traffic
   - qos_unit
-  - qos_value
   - qos_constraint
-  - location
   - hour
   - device
   - sensor_type
   - air_quality_parameter
   - air_quality_sensor
-  - endpoint
+  - node
+  - node_group
+  - power_action
+  - power_saving_mode
+  - objective_function
+  - duty_cycle
+  - trickle_algorithm
+  - energy_metric
+  - routing_protocol
+  - query_type
+  - metric_to_show
+  - sleep_schedule_start
+  - sleep_schedule_end
+  - wake_interval
+  - sleep_mode
+  - security_action
+  - encryption_key
+  - authentication_mode
+  - load_balancing_strategy
+  - priority_level
+  - threshold_value
+  - trickle_imin
+  - trickle_imax
+  - trickle_redundancy
+  - message_type
+  - radio_channel
+  - tx_power
+  - data_rate
+  - frequency_hopping
+  - simulation_duration
+  - comparison
+  - prediction
+  - alert_condition
+  - report_interval
+  - firmware_version
+  - update_schedule
+  - rollback
+
 slots:
+  origin:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  destination:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  qos_value:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  protocol:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  operation:
+    type: text
+    influence_conversation: true
+    auto_fill: true
   entity:
     type: categorical
     values:
@@ -60,10 +115,6 @@ slots:
     influence_conversation: true
     auto_fill: true
   location:
-    type: text
-    influence_conversation: false
-    auto_fill: true
-  qos_value:
     type: text
     influence_conversation: false
     auto_fill: true
@@ -95,6 +146,206 @@ slots:
   intent_id:
     type: text
     influence_conversation: false
+  node:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  node_group:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  power_action:
+    type: categorical
+    values:
+      - shutdown
+      - reboot
+      - reset
+      - power_off
+    influence_conversation: true
+    auto_fill: true
+  power_saving_mode:
+    type: categorical
+    values:
+      - on
+      - off
+    influence_conversation: true
+    auto_fill: true
+  objective_function:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  duty_cycle:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  trickle_algorithm:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  energy_metric:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  routing_protocol:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  query_type:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  metric_to_show:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  sleep_schedule_start:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  sleep_schedule_end:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  wake_interval:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  sleep_mode:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  security_action:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  encryption_key:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  authentication_mode:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  load_balancing_strategy:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  priority_level:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  threshold_value:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  trickle_imin:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  trickle_imax:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  trickle_redundancy:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  message_type:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  radio_channel:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  tx_power:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  data_rate:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  frequency_hopping:
+    type: categorical
+    values:
+      - on
+      - off
+    influence_conversation: true
+    auto_fill: true
+  simulation_duration:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  comparison:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  prediction:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  alert_condition:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  report_interval:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  firmware_version:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  update_schedule:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+  rollback:
+    type: text
+    influence_conversation: true
+    auto_fill: true
+
+regex:
+  - name: origin
+    pattern: '\b(10\.\d{1,3}\.\d{1,3}\.\d{1,3}|temp\d|hum\d|air\d|cam\d*|cam)\b'
+  - name: destination
+    pattern: '\b(10\.\d{1,3}\.\d{1,3}\.\d{1,3}|temp\d|hum\d|air\d|cam\d*|cam)\b'
+  - name: operation_block
+    pattern: '\b(block|deny|prevent)\b'
+  - name: operation_allow
+    pattern: '\b(allow|permit|unblock)\b'
+  - name: sensor_type
+    pattern: '\b(temperature|humidity|motion|light|pressure|gas|smoke|sound|noise|uv|co2|pm2\.5|voc|ozone|flame|rain|wind speed|soil moisture|vibration|leak|radiation|water level|voltage|current|power|flow|speed|ph|turbidity|door|window|occupancy|flood|presence|level)\b'
+  - name: location
+    pattern: '\b(lab|labs|dorms|server|servers|network|internet|gateway|dmz|lan|campus|classroom|kitchen|greenhouse|warehouse|faculty|students|staff|guests|hr|backend|database|office|room|hall|basement|garage|roof|field|garden|pool|bridge|tank|panel|rack|building|corridor|cold room|incubator|autoclave|conveyor|freezer|motor|studio|house|my house|university|pucrs|ufrgs|att|verizon|hosts|computers|application|entry|external|entrypoint|boardroom|hospital|factory|lobby|meeting room|video server|my mac|macbook|ps4|playstation|dorm|bedroom|residents|student housing)\b'
+  - name: node
+    pattern: '\b(temp\d|hum\d|air\d|cam\d*|cam|10\.\d{1,3}\.\d{1,3}\.\d{1,3})\b'
+  - name: node_group
+    pattern: '\b(all|sensors|gateways|actuators|routers|leaves|dodag|root)\b'
+  - name: power_action
+    pattern: '\b(shutdown|reboot|reset|power off|power_off)\b'
+  - name: power_saving_mode
+    pattern: '\b(on|off)\b'
+  - name: objective_function
+    pattern: '\b(OF0|MRHOF|COM-OF|ADAPTIVE-OF|ADDITIVE-OF|EEQ|EL-RPL|RM-RPL|CQAOF|SIGMA)\b'
+  - name: duty_cycle
+    pattern: '\b(\d+%)\b'
+  - name: trickle_algorithm
+    pattern: '\b(FL-Trickle|FI-Trickle|D-Trickle|Elastic Trickle|LA-Trickle|EE-Trickle)\b'
+  - name: energy_metric
+    pattern: '\b(ETX|energy|hop_count|RSSI|residual_energy|buffer_occupancy)\b'
+  - name: routing_protocol
+    pattern: '\b(RPL|DYMO-LOW|LOAD|HYDRO|Thread|6LoWPAN|6TiSCH)\b'
+  - name: hour
+    pattern: '\b(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\b'
+  - name: sleep_schedule_start
+    pattern: '\b(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\b'
+  - name: sleep_schedule_end
+    pattern: '\b(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\b'
+  - name: wake_interval
+    pattern: '\b(\d+)\s*(seconds|minutes|hours)\b'
+
 responses:
   utter_greet:
     - text: Hey! How are you?
@@ -135,6 +386,7 @@ responses:
           payload: air_quality_sensor
   utter_ask_value:
     - text: And what is the value for the {entity}?
+
 actions:
   - action_build
   - action_deploy
